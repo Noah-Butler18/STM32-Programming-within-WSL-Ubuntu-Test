@@ -1,0 +1,25 @@
+name: Unit Tests
+
+on: [push]
+
+jobs:
+
+  docker-unit-tests:	
+    runs-on: ubuntu-latest
+    name: Build and test unit tests Docker image
+    steps:
+
+      # This step is needed to clone our the Ubuntu VM used by GitHub Actions, so that we can actually run our code inside there
+      # Checkout itself is a standard github action of one or more actions that have been bundled up
+      # Use github.com/actions/checkout to check out this repo
+      - name: Check out this repo
+        uses: actions/checkout@v4
+
+      # See where I am in the VM
+      - run: pwd
+
+      - name: Build Docker image
+        run: docker build -t unit-tests-image -f Dockerfile .
+
+      - name: Run tests in Docker image
+        run: docker run --rm unit-tests-image
