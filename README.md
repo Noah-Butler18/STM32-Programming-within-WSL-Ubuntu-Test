@@ -7,11 +7,11 @@ Useful guides here:
   - https://learn.microsoft.com/en-us/windows/wsl/connect-usb#install-the-usbip-tools-and-hardware-database-in-linux
   - https://hackmd.io/@aeefs2Y8TMms-cjTDX4cfw/r1fqAa_Da#My-setup
 
-	• Installs usbipd in windows host
-	• Attaches desired usb devices to wsl2 so that ubuntu subsystem can access it
-	• Sets up permissions in ubuntu for usb debugging as ,$USER> user, not just root
-		○ "Ensure that the device is accesible by plugdev group and also the read, write permissions"
-    ○ Use 'ls -l /dev/bus/usb/<Bus>/<Device>' where bus and device can be obtained by using lsusb command in ubuntu
+	- Installs usbipd in windows host
+	- Attaches desired usb devices to wsl2 so that ubuntu subsystem can access it
+	- Sets up permissions in ubuntu for usb debugging as ,$USER> user, not just root
+		- "Ensure that the device is accesible by plugdev group and also the read, write permissions"
+    		- Use 'ls -l /dev/bus/usb/<Bus>/<Device>' where bus and device can be obtained by using lsusb command in ubuntu
 
 
 Now, the device should be accessible to wsl2 applications
