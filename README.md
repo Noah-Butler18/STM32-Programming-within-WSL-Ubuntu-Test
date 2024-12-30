@@ -19,3 +19,21 @@ Now, the device should be accessible to wsl2 applications
 NOTE: YOU WILL HAVE TO RERUN "usbipd attach --wsl --busid <BUSID>" IN WINDOWS 11 SHELL EVERYTIME YOU PHYSICALLY DISCONNECT THE STM32
 
 
+----- Installing GCC for ARM cross-compiler on WSL2 -----
+1. Go to https://developer.arm.com/downloads/-/gnu-rm
+2. Download Linux x86_64 Tarball on Windows side
+3. Copy the tar file from windows mnt to my user directory (NOT root directory) within wsl using mounted windows drive
+4. Use "tar -xvf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2" to extract and download cross compiler
+5. Add the cross-compile "arm-none-eabi-gcc" command to the Linux command search path with:
+	"export PATH=$PATH:~/gcc-arm-none-eabi-10.3-2021.10/bin"
+6. Make sure everything went well and the executable cross-compiler is working:
+	:~$       arm-none-eabi-gcc --version
+	arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)
+	Copyright (C) 2020 Free Software Foundation, Inc.
+	This is free software; see the source for copying conditions.  There is NO
+	warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+
+
