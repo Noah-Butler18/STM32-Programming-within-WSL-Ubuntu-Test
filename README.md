@@ -1,6 +1,7 @@
 # STR32-Programming-within-WSL-Ubuntu-Test
 Testing out arm-gcc build toolchain, OpenOCD programming and gdb debugging from scratch using WSL2 (Ubuntu 24.04) in x86-64 Windows 11 host machine environment
 
+----- Installing usbipd for USB device visibility within WSL -----
 
 Important: WSL2 does not natively support the recognizing of USB devices connected to the host Windows 11 machine. In order to get this working, there is some WSL configuration you need to do:
 Useful guides here: 
@@ -20,6 +21,7 @@ NOTE: YOU WILL HAVE TO RERUN "usbipd attach --wsl --busid <BUSID>" IN WINDOWS 11
 
 
 ----- Installing GCC for ARM cross-compiler on WSL2 -----
+
 1. Go to https://developer.arm.com/downloads/-/gnu-rm
 2. Download Linux x86_64 Tarball on Windows side
 3. Copy the tar file from windows mnt to my user directory (NOT root directory) within wsl using mounted windows drive
