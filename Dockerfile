@@ -9,7 +9,7 @@ RUN apt update && \
 RUN mkdir /project
 COPY src project/src
 COPY tests project/tests
-COPY makefile /project/makefile
+COPY Makefile /project/Makefile
 
 # Download and build CppUTest
 RUN mkdir /project/tools/ && \
