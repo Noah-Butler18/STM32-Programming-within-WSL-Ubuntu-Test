@@ -1,7 +1,7 @@
 # Name of component under test
 # (NAMING THE COMPONENT IS REQUIRED BY THE CPUUTEST MAKEFILE WORKER)
 # Always name your component after the directory that the unit test is in
-COMPONENT_NAME = average
+COMPONENT_NAME = drivers
 
 # Dynamically generate absolute paths
 # CppUTest plays nicer if we supply it with absolute paths (no ".", "..", "//", etc in path)
