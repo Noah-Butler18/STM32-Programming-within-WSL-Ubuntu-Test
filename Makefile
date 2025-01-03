@@ -22,6 +22,7 @@ CFLAGS += -mcpu=$(MACH) -mthumb
 # If you want to do wildcard expansion in such places, you need to use the wildcard function, like this:
 # $(wildcard pattern…)
 CSOURCES = $(SRC_DIR)/001led_toggle.c
+CSOURCES += $(SRC_DIR)/startup_stm32f407vgtx.c
 CSOURCES += $(wildcard $(SRC_DIR)/drivers/src/*.c)
 # $(wildcard $(SRC_DIR)/.../*.c) effectively expands into all .c files (source files) in the source directory
 
