@@ -393,8 +393,7 @@ typedef struct
 													(Address == GPIOF) || \
 													(Address == GPIOG) || \
 													(Address == GPIOH) || \
-													(Address == GPIOI) || \
-													(Address == GPIOJ)  )
+													(Address == GPIOI) 	)
 
 
 /*
