@@ -82,6 +82,12 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
  */
 void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 {
+	if( !(GPIO_PERI_BASE_ADDR_VALID(pGPIOHandle->pGPIOx)) )
+	{
+		pGPIOHandle->pGPIOx = NULL;
+		return;
+	}
+
 	 uint32_t temp=0; //temp. register
 
 	 //enable the peripheral clock
