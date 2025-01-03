@@ -19,8 +19,8 @@ CPPUTEST_HOME ?= $(PROJECT_DIR)/tools/cpputest
 
 # Source and include files for component under test
 # This is why naming helps a lot, we should name our component the same as the directory of the source file of the component
-INCLUDE_DIRS = $(SRC_DIR)/$(COMPONENT_NAME)
-SRC_DIRS = $(SRC_DIR)/$(COMPONENT_NAME)
+INCLUDE_DIRS = $(SRC_DIR)/$(COMPONENT_NAME)/inc
+SRC_DIRS = $(SRC_DIR)/$(COMPONENT_NAME)/src
 
 # Includes CppUTest header files
 INCLUDE_DIRS += -I $(CPPUTEST_HOME)/include
