@@ -26,19 +26,21 @@ TEST(TestsGpioDriver, Test1)
 	//Test for valid base GPIO peripheral register address
 	GPIO_RegDef_t *TestAddr1 = NULL;
 	GPIO_RegDef_t *TestAddr2 = (GPIO_RegDef_t*) 0x08000000U;
-	GPIO_RegDef_t *TestAddr3 = (GPIO_RegDef_t*) -1U;	
+	GPIO_RegDef_t *TestAddr3 = GPIOA;	
 	
+	//Invalid, should make pointer NULL and return
 	GPIO_Handle_t TestHandle;
 	TestHandle.pGPIOx = TestAddr1;
 	GPIO_Init(&TestHandle);
-	CHECK_EQUAL(NULL, TestHandle.pGPIOx);
-
-	TestHandle.pGPIOx = TestAddr1;
+	POINTERS_EQUAL(NULL, TestHandle.pGPIOx);
+	
+	//Invalid, should make pointer NULL and return
+	TestHandle.pGPIOx = TestAddr2;
 	GPIO_Init(&TestHandle);
-	CHECK_EQUAL(NULL, TestHandle.pGPIOx);
+	POINTERS_EQUAL(NULL, TestHandle.pGPIOx);
 
-	TestHandle.pGPIOx = TestAddr1;
+	//Valid, no action taken and function should execute successfully
+	TestHandle.pGPIOx = TestAddr3;
 	GPIO_Init(&TestHandle);
-	CHECK_EQUAL(NULL, TestHandle.pGPIOx);
-
+	POINTERS_EQUAL(GPIOA, TestHandle.pGPIOx);
 }
