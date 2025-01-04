@@ -76,3 +76,8 @@ test:
 .PHONY: test_clean
 test_clean:
 	make -C $(TEST_DIR) clean
+
+#Run OpenOCD with our board config file
+.PHONY: load
+load:
+	openocd -f /usr/share/openocd/scripts/board/stm32f4discovery.cfg
