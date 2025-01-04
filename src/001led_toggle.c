@@ -1,5 +1,11 @@
 #include "stm32f407xx.h"
 
+
+const uint32_t pi = 3;
+const uint8_t small_var = 1;
+uint32_t radius = 2;
+uint32_t diameter;
+
 void delay(void)
 {
 	for(uint32_t i = 0 ; i < 500000 ; i ++);
@@ -7,6 +13,11 @@ void delay(void)
 
 int main(void)
 {
+	diameter = radius * 2;
+	uint32_t area = pi * radius * radius;
+	uint32_t circumference = pi * diameter;
+	(void) area;
+	(void) circumference;
 
 	GPIO_Handle_t GpioLed;
 

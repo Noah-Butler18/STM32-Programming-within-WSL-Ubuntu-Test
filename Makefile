@@ -30,7 +30,9 @@ CSOURCES += $(wildcard $(SRC_DIR)/drivers/src/*.c)
 CFLAGS += -Wall
 
 # Linker flags
-LDFLAGS += 
+LDFLAGS += -nostdlib -T $(SRC_DIR)/stm32_ls.ld
+LDFLAGS += -Wl,-Map=final.map
+# -Map flag is optional linker argument to generate a map file for the final .elf executable. Useful for analyzing/verifying memory locations and more!
 
 # Generate names for output object files (*.o) of each source file 
 # Uses built-in make function patsubst "pattern string substitute"  
@@ -57,7 +59,7 @@ $(COBJECTS) : %.o : %.c
 # Build the target application
 .PHONY: $(BUILD_NAME)
 $(BUILD_NAME) : $(COBJECTS)
-	$(CC) $(COBJECTS) -o $(BUILD_DIR)/$(BUILD_NAME) $(LDFLAGS)
+	$(CC) $(LDFLAGS) $(COBJECTS) -o $(BUILD_DIR)/$(BUILD_NAME)
 
 # Remove any object files (Uses BASH command rm)
 .PHONY: clean
