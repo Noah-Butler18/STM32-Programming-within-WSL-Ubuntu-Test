@@ -8,12 +8,14 @@ SRC_DIR = ./src
 TEST_DIR = ./tests
 BUILD_DIR = .
 BUILD_NAME = app.elf
+BUILD_NAME_SEMIHOSTING = app_sh.elf
 
 # Search path for header files
 # We want to include a header file in our main.c that is not in the same directory as main.c
 # So, we have to instruct the compiler on where to find the header file using -I
 CFLAGS += -I $(SRC_DIR)/drivers/inc
 CFLAGS += -std=gnu11 -O0
+CFLAGS += -mfloat-abi=soft # Needed to tell compiler to generate opcodes for either a hardware FPU or opcodes from software libraries
 CFLAGS += -mcpu=$(MACH) -mthumb
 # Last line is necessary for cross-compiler to produce appropriate machine code/assembly mnemonics for target architecture
 
@@ -33,7 +35,10 @@ CFLAGS += -Wall
 # Linker flags
 # Because we are using newlib, newlib nano, semihosting, etc. - We need to link appropriate GNU ARM toochain .specs file which came with the toolchain download (as well as all the library implementations)
 LDFLAGS += -T $(SRC_DIR)/stm32_ls.ld
-LDFLAGS += --specs=nano.specs
+#LDFLAGS += --specs=nano.specs #NEWLIB NANO ONLY
+LDFLAGS += --specs=rdimon.specs #SEMIHOSTING + NEWLIB NANO
+LDFLAGS += -mcpu=$(MACH) -mthumb # Needed to link with standard C library
+LDFLAGS += -mfloat-abi=soft # Needed to tell linker to link relevant software libraries to implement floating point operations
 LDFLAGS += -Wl,-Map=final.map
 # -Map flag is optional linker argument to generate a map file for the final .elf executable. Useful for analyzing/verifying memory locations and more!
 
@@ -46,6 +51,10 @@ COBJECTS += $(patsubst %.c, %.o, $(CSOURCES))
 # Default rule: build application
 .PHONY: all
 all : $(BUILD_NAME)
+
+# Build semihosting-enabled application
+.PHONY: semihosting
+semihosting : $(BUILD_NAME_SEMIHOSTING)
 
 # Build components (individual object files)
 # The first line here is an expansion, not a rule. It takes the *.o files in CSOURCES and expands them out to both .o and .c files for the following recipe
@@ -64,10 +73,16 @@ $(COBJECTS) : %.o : %.c
 $(BUILD_NAME) : $(COBJECTS)
 	$(CC) $(LDFLAGS) $(COBJECTS) -o $(BUILD_DIR)/$(BUILD_NAME)
 
+# Build semihosting-enabled target application
+$(BUILD_NAME_SEMIHOSTING) : $(COBJECTS)
+	$(CC) $(LDFLAGS) $(filter-out $(SRC_DIR)/syscalls.o,$(COBJECTS)) -o $(BUILD_DIR)/$(BUILD_NAME_SEMIHOSTING)
+# Filtering out the syscalls.o file that implements low-level system calls. This conflicts with the semihosting library - it already implements these
+# Uses built-in make function filter-out
+
 # Remove any object files (Uses BASH command rm)
 .PHONY: clean
 clean:
-	rm -f $(COBJECTS) $(BUILD_NAME)
+	rm -f $(COBJECTS) $(BUILD_NAME) $(BUILD_NAME_SEMIHOSTING)
 # -f flag = Do not prompt user before removing files
 
 # Run tests from home directory of project

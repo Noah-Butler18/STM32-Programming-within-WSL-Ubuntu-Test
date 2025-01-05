@@ -24,7 +24,9 @@ SECTIONS
 		_etext = .;
 	}> FLASH
 
-	
+	/* LOADADDR(section) = standard function in linker script that returns the absolute LMA of the named section */
+	_load_addr_data = LOADADDR(.data);
+
 	.data :
 	{
 		_sdata = .;
@@ -45,6 +47,7 @@ SECTIONS
 		_ebss = .;
 		__bss_end__ = _ebss;
 		. = ALIGN(4);
-		end = .;
+		end = .;				/* Symbol needed for system call implementations in our own syscalls.c source file */
+		__end__ = .; 			/* Symbol needed for system call implementations in semihosting library */
 	}> SRAM
 }

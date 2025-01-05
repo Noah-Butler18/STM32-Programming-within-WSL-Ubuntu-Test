@@ -16,6 +16,7 @@ extern uint32_t _sdata;
 extern uint32_t _edata;
 extern uint32_t _sbss;
 extern uint32_t _ebss;
+extern uint32_t _load_addr_data;
 
 //prototype of main()
 int main(void);
@@ -229,8 +230,8 @@ void Reset_Handler(void)
 {
 	//Copy .data section to proper SRAM location
 	uint32_t _data_size = (uint32_t) &_edata - (uint32_t) &_sdata;
-	uint8_t *pSource_Byte = (uint8_t *) &_etext;		//FLASH .data source location  = 0x0800_0000 + sizeof(.text)
-	uint8_t *pDestination_Byte = (uint8_t *) &_sdata;	//SRAM .data destination location = 0x2000_0000
+	uint8_t *pSource_Byte = (uint8_t *) &_load_addr_data;			//FLASH .data source location = 0x0800_0000 + sizeof(everything before .data section)
+	uint8_t *pDestination_Byte = (uint8_t *) &_sdata;				//SRAM .data destination location = 0x2000_0000
 
 	for(uint32_t Num_Bytes_Copied = 0; Num_Bytes_Copied < _data_size; Num_Bytes_Copied++)
 	{

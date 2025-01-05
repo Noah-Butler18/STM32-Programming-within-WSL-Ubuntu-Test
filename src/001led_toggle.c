@@ -13,10 +13,14 @@ const uint8_t small_var = 1;
 uint32_t radius = 2;
 uint32_t diameter;
 
+extern void initialise_monitor_handles(void); //Semihosting init function
+
 void delay(void);
 
 int main(void)
 {
+	initialise_monitor_handles(); 
+
 	diameter = radius * 2;
 	uint32_t area = pi * radius * radius;
 	uint32_t circumference = pi * diameter;
@@ -38,10 +42,10 @@ int main(void)
 	while(1)
 	{
 		GPIO_ToggleOutputPin(GPIOD, 12);
+		printf("LED toggled\n");
 		delay();
 	}
 
-	printf("Toggled!\n");
 }
 
 void delay(void)
