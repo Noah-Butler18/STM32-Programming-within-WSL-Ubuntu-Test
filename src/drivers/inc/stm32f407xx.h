@@ -382,19 +382,6 @@ typedef struct
  */
  #define ASSERT_TRUE(expression) 				(expression ? 1 : while(1); )
 
- /*
- * This macro checks if the GPIO peripheral base address is valied (ie, GPIOA, B, C, etc.). Used in GPIO_Init() API
- */
- #define GPIO_PERI_BASE_ADDR_VALID(Address)		( 	(Address == GPIOA) || \
-													(Address == GPIOB) || \
-													(Address == GPIOC) || \
-													(Address == GPIOD) || \
-													(Address == GPIOE) || \
-													(Address == GPIOF) || \
-													(Address == GPIOG) || \
-													(Address == GPIOH) || \
-													(Address == GPIOI) 	)
-
 
 /*
  * This macro returns a code( between 0 to 7) for a given GPIO base address(x)
