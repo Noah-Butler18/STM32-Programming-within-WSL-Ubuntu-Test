@@ -37,6 +37,7 @@ SECTIONS
 		_sbss = .;
 		__bss_start__ = _sbss;
 		*(.bss)
+		*(.bss.*)
 		*(COMMON)
 		. = ALIGN(4);
 		_ebss = .;
