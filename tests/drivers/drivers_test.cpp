@@ -26,14 +26,17 @@ TEST(TestsGpioDriver, Test1)
 	CHECK_EQUAL(2, 2);
 }
 
-/*
+
 TEST(TestsGpioDriver, Test2)
 {
+	POINTERS_EQUAL(NULL, NULL);
+
 	//Test for valid base GPIO peripheral register address
-	GPIO_RegDef_t test;
-	//GPIO_RegDef_t *TestAddr1 = NULL;
+	
+	GPIO_RegDef_t *TestAddr1 = NULL;
 	//GPIO_RegDef_t *TestAddr2 = (GPIO_RegDef_t *)malloc(sizeof(GPIO_RegDef_t));
-	GPIO_RegDef_t *TestAddr3 = &test;
+	//GPIO_RegDef_t test;
+	//GPIO_RegDef_t *TestAddr3 = &test;
 	
 	//Invalid NULL pointer, should immediately return
 	GPIO_Handle_t TestHandle;
@@ -41,7 +44,7 @@ TEST(TestsGpioDriver, Test2)
 	TestHandle.pGPIOx = TestAddr1;	
 	GPIO_Init(&TestHandle);
 	POINTERS_EQUAL(NULL, TestHandle.pGPIOx);
-	
+	/*
 	//Valid, no action taken and function should execute successfully
 	TestHandle.pGPIOx = TestAddr2;
 	GPIO_Init(&TestHandle);
@@ -51,5 +54,5 @@ TEST(TestsGpioDriver, Test2)
 	TestHandle.pGPIOx = TestAddr3;
 	GPIO_Init(&TestHandle);
 	POINTERS_EQUAL(&test, TestHandle.pGPIOx);
+	*/
 }
-*/
