@@ -50,6 +50,5 @@ TEST(TestsGpioDriver, Test2)
 	GPIO_RegDef_t *TestAddr3 = &testreg;
 	TestHandle.pGPIOx = TestAddr3;
 	//GPIO_Init(&TestHandle);
-	POINTERS_EQUAL(&test, TestHandle.pGPIOx);
-	
+	POINTERS_EQUAL(&testreg, TestHandle.pGPIOx);
 }
