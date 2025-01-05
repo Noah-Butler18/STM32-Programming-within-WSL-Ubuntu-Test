@@ -31,7 +31,6 @@ TEST(TestsGpioDriver, Test1)
 	
 	//Invalid NULL pointer, should immediately return
 	GPIO_Handle_t TestHandle;
-	TestHandle.GPIO_PinConfig;
 	
 	TestHandle.pGPIOx = TestAddr1;
 	GPIO_Init(&TestHandle);
