@@ -7,3 +7,6 @@
 
 # CppUTest framework
 cpputest/
+
+# vscode config
+.vscode/
