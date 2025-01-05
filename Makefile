@@ -23,6 +23,7 @@ CFLAGS += -mcpu=$(MACH) -mthumb
 # $(wildcard pattern…)
 CSOURCES = $(SRC_DIR)/001led_toggle.c
 CSOURCES += $(SRC_DIR)/startup_stm32f407vgtx.c
+CSOURCES += $(SRC_DIR)/syscalls.c
 CSOURCES += $(wildcard $(SRC_DIR)/drivers/src/*.c)
 # $(wildcard $(SRC_DIR)/.../*.c) effectively expands into all .c files (source files) in the source directory
 
@@ -30,7 +31,9 @@ CSOURCES += $(wildcard $(SRC_DIR)/drivers/src/*.c)
 CFLAGS += -Wall
 
 # Linker flags
-LDFLAGS += -nostdlib -T $(SRC_DIR)/stm32_ls.ld
+# Because we are using newlib, newlib nano, semihosting, etc. - We need to link appropriate GNU ARM toochain .specs file which came with the toolchain download (as well as all the library implementations)
+LDFLAGS += -T $(SRC_DIR)/stm32_ls.ld
+LDFLAGS += --specs=nano.specs
 LDFLAGS += -Wl,-Map=final.map
 # -Map flag is optional linker argument to generate a map file for the final .elf executable. Useful for analyzing/verifying memory locations and more!
 
