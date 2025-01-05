@@ -19,6 +19,7 @@ extern uint32_t _ebss;
 
 //prototype of main()
 int main(void);
+void __libc_init_array(void);
 
 void Default_Handler(void);
 
@@ -249,6 +250,7 @@ void Reset_Handler(void)
 	}
 
 	//Call init function of standard libraries being used in the project the startup file is meant for
+	__libc_init_array();
 
 	//Call main() to enter user application
 	main();

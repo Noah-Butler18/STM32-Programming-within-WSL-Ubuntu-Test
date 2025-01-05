@@ -16,6 +16,8 @@ SECTIONS
 		*(.Vector_table)
 		*(.text)
 		*(.text.*)
+		*(.init)
+		*(.fini)
 		*(.rodata)
 		*(.rodata.*)
 		. = ALIGN(4);
