@@ -51,4 +51,6 @@ TEST(TestsGpioDriver, Test2)
 	TestHandle.pGPIOx = TestAddr3;
 	//GPIO_Init(&TestHandle);
 	POINTERS_EQUAL(&testreg, TestHandle.pGPIOx);
+
+	free(TestAddr2);
 }
