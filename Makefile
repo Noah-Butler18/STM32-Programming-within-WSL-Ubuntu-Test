@@ -25,18 +25,20 @@ CFLAGS += -mcpu=$(MACH) -mthumb
 # $(wildcard pattern…)
 CSOURCES = $(SRC_DIR)/001led_toggle.c
 CSOURCES += $(SRC_DIR)/startup_stm32f407vgtx.c
-CSOURCES += $(SRC_DIR)/syscalls.c
+#CSOURCES += $(SRC_DIR)/syscalls.c
 CSOURCES += $(wildcard $(SRC_DIR)/drivers/src/*.c)
 # $(wildcard $(SRC_DIR)/.../*.c) effectively expands into all .c files (source files) in the source directory
 
 # Compiler flags
 CFLAGS += -Wall
+CFLAGS += -g -Wstrict-prototypes -Wextra -Werror -Wshadow -Wswitch-default # ADDED 1/5/25 BY NGB TO MIMIC BEHAVIOR OF CPPUTEST COMPILATION********************************************************************************************
+CFLAGS += -Wswitch-enum -Wconversion -Wno-long-long -pedantic-errors -Wsign-conversion # ADDED 1/5/25 BY NGB TO MIMIC BEHAVIOR OF CPPUTEST COMPILATION********************************************************************************************
 
 # Linker flags
 # Because we are using newlib, newlib nano, semihosting, etc. - We need to link appropriate GNU ARM toochain .specs file which came with the toolchain download (as well as all the library implementations)
 LDFLAGS += -T $(SRC_DIR)/stm32_ls.ld
-#LDFLAGS += --specs=nano.specs #NEWLIB NANO ONLY
-LDFLAGS += --specs=rdimon.specs #SEMIHOSTING + NEWLIB NANO
+#LDFLAGS += --specs=nano.specs # ***************NEWLIB NANO ONLY********************************************************************************************
+LDFLAGS += --specs=rdimon.specs # ***************SEMIHOSTING + NEWLIB NANO********************************************************************************************
 LDFLAGS += -mcpu=$(MACH) -mthumb # Needed to link with standard C library
 LDFLAGS += -mfloat-abi=soft # Needed to tell linker to link relevant software libraries to implement floating point operations
 LDFLAGS += -Wl,-Map=final.map
