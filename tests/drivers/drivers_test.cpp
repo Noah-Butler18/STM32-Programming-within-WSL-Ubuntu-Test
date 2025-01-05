@@ -24,14 +24,14 @@ TEST_GROUP(TestsGpioDriver)
 TEST(TestsGpioDriver, Test1)
 {
 	//Test for valid base GPIO peripheral register address
-	GPIO_RegDef_t test = {0};
+	GPIO_RegDef_t test;
 	GPIO_RegDef_t *TestAddr1 = NULL;
 	GPIO_RegDef_t *TestAddr2 = (GPIO_RegDef_t *)malloc(sizeof(GPIO_RegDef_t));
 	GPIO_RegDef_t *TestAddr3 = &test;
 	
 	//Invalid NULL pointer, should immediately return
 	GPIO_Handle_t TestHandle;
-	TestHandle.GPIO_PinConfig_t = {0};
+	TestHandle.GPIO_PinConfig_t;
 	
 	TestHandle.pGPIOx = TestAddr1;
 	GPIO_Init(&TestHandle);
