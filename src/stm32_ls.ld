@@ -15,7 +15,9 @@ SECTIONS
 		
 		*(.Vector_table)
 		*(.text)
+		*(.text.*)
 		*(.rodata)
+		*(.rodata.*)
 		. = ALIGN(4);
 		_etext = .;
 	}> FLASH
@@ -25,6 +27,7 @@ SECTIONS
 	{
 		_sdata = .;
 		*(.data)
+		*(.data.*)
 		. = ALIGN(4);
 		_edata = .;
 	}> SRAM AT> FLASH
