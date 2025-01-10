@@ -4,9 +4,7 @@
 #define SRAM_SIZE			(128 * 1024)					//128kB 
 #define SRAM_END			((SRAM_START) + (SRAM_SIZE))		//End: 0x2002_0000 
 
-#define STACK_START			SRAM_END
-#define STACK_SIZE			(128 * 1024)					//128kB 
-#define STACK_END			((STACK_START) + (STACK_SIZE))		//End: 0x2002_0000 
+#define STACK_START			SRAM_END						//Stack get decremented, will grow towards SRAM_START
 
 #define FLASH_START			0x08000000U
 #define FLASH_SIZE			(1024 * 1024) 					//1024kB = 1MB
